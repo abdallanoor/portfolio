@@ -1,0 +1,18 @@
+{
+  "layout": {
+    "title": "Abdallah Noor",
+    "description": "Abdallah software engineer portfolio."
+  },
+  "header": {
+    "name": "Abdallah Noor",
+    "toggleTheme": "Toggle theme"
+  },
+  "hero": {
+    "available": "Available for work",
+    "name": "Abdallah Noor",
+    "title": "Software Engineer",
+    "description": "I build exceptional digital experiences using the latest technologies. Specialized in creating software systems for individuals and startups.",
+    "contact": "Let's Talk",
+    "portfolio": "View Work"
+  }
+}
