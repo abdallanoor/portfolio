@@ -14,5 +14,12 @@
     "description": "I build exceptional digital experiences using the latest technologies. Specialized in creating software systems for individuals and startups.",
     "contact": "Let's Talk",
     "portfolio": "View Work"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "Here you will find more information about me, what I do, and my current skills.",
+    "description1": "A software engineer specializing in building modern web applications. I work with individuals and startups to transform their ideas into successful digital products.",
+    "description2": "My experience includes front-end development, designing interactive user interfaces, and building scalable systems with a focus on security and performance.",
+    "technologies": "Technologies"
   }
 }
