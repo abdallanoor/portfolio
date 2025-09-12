@@ -9,7 +9,7 @@ export default function Hero() {
   const t = useTranslations("hero");
 
   return (
-    <div className="container mt-32">
+    <section className="container pt-32 h-[calc(100vh-100px)] sm:h-screen">
       <Badge
         variant="secondary"
         className="mb-10 gap-1.5 rounded-full px-4 py-2"
@@ -44,6 +44,6 @@ export default function Hero() {
           <ArrowUpRight className="size-4" />
         </Button>
       </div>
-    </div>
+    </section>
   );
 }
