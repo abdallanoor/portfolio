@@ -7,7 +7,7 @@ export default function SectionHeader({
 }) {
   return (
     <>
-      <div className="relative w-fit text-foreground">
+      <div className="relative max-w-fit text-foreground">
         <h2 className="text-3xl font-light">{title}</h2>
         <svg
           className="w-full h-2 rtl:mt-2"
