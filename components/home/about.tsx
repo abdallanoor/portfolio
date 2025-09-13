@@ -17,7 +17,7 @@ const technologies = [
   "Git & GitHub",
 ];
 
-export default function AboutSection() {
+export default function About() {
   const t = useTranslations("about");
 
   return (
