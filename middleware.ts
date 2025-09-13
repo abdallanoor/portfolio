@@ -3,8 +3,7 @@ import { routing } from './i18n/routing';
 
 export default createMiddleware({
   ...routing,
-  // Disable automatic locale detection from headers/cookies
-  localeDetection: false
+  // localeDetection: false
 });
 
 export const config = {
