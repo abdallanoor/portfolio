@@ -9,7 +9,7 @@ export default function Hero() {
   const t = useTranslations("hero");
 
   return (
-    <section className="container pt-32 h-[calc(100vh-100px)] sm:h-screen">
+    <section className="container py-32">
       <Badge
         variant="secondary"
         className="mb-10 gap-1.5 rounded-full px-4 py-2"
