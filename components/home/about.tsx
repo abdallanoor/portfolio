@@ -21,7 +21,7 @@ export default function About() {
   const t = useTranslations("about");
 
   return (
-    <section className="container grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-16 py-8">
+    <section className="section container">
       <div className="md:col-span-2">
         <SectionHeader title={t("title")} description={t("description")} />
       </div>
