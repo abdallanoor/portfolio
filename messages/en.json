@@ -21,5 +21,44 @@
     "description1": "A software engineer specializing in building modern web applications. I work with individuals and startups to transform their ideas into successful digital products.",
     "description2": "My experience includes front-end development, designing interactive user interfaces, and building scalable systems with a focus on security and performance.",
     "technologies": "Technologies"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "Here are a few projects I've worked on recently. Want to see more? Email me.",
+    "status": {
+      "active": "Active",
+      "archived": "Archived",
+      "in-development": "In Development",
+      "featured": "Featured"
+    },
+    "buttons": {
+      "hide": "Hide"
+    },
+    "list": [
+      {
+        "title": "Iwan Academy",
+        "description": "An academic platform for teaching Islamic studies and Arabic language, offering courses, articles, recorded lessons, with a payment system and admin dashboard."
+      },
+      {
+        "title": "Pera Pixel Agency",
+        "description": "A landing page for a specialized video editing agency."
+      },
+      {
+        "title": "AFWASA 2026",
+        "description": "Official website for the African Water and Sanitation Association with a registration system to manage participant data easily."
+      },
+      {
+        "title": "Tazkara",
+        "description": "A web platform for booking events, showcasing activities, buying tickets, with an admin panel for platform management."
+      },
+      {
+        "title": "E-Commerce Store",
+        "description": "A complete e-commerce platform with login, product browsing, cart management, and payment processing."
+      },
+      {
+        "title": "Warehouse Management System",
+        "description": "A system for managing inventory, suppliers, and clients with sales and invoice tracking to improve daily operations."
+      }
+    ]
   }
 }
