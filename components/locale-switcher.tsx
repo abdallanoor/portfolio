@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/routing";
 import { useTransition } from "react";
-import { Languages } from "lucide-react";
+import { Languages, Loader2 } from "lucide-react";
 
 export default function LocaleSwitcher() {
   const [isPending, startTransition] = useTransition();
@@ -23,7 +23,11 @@ export default function LocaleSwitcher() {
       onClick={() => onSelectChange(locale === "en" ? "ar" : "en")}
       className="cursor-pointer flex items-center justify-center gap-1 p-1 rounded-sm text-sm text-primary/70 hover:text-primary transition-colors duration-300 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
     >
-      <Languages className="size-3" />
+      {isPending ? (
+        <Loader2 className="size-4 animate-spin" />
+      ) : (
+        <Languages className="size-4" />
+      )}
       {locale === "ar" ? "English" : "العربية"}
     </button>
   );
