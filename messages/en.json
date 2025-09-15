@@ -60,5 +60,37 @@
         "description": "A system for managing inventory, suppliers, and clients with sales and invoice tracking to improve daily operations."
       }
     ]
+  },
+  "contact": {
+    "title": "Let's collaborate",
+    "description": "Do you have a project in mind or want to discuss an idea? I enjoy working on standout ideas and complex projects. Feel free to get in touch.",
+    "links": {
+      "email": "Email",
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "whatsapp": "Whatsapp"
+    },
+    "fields": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Enter your full name",
+      "email": "email@example.com",
+      "message": "Write your message here..."
+    },
+    "validation": {
+      "required": "This field is required",
+      "nameMinLength": "Name must be at least 2 characters long",
+      "emailInvalid": "Please enter a valid email address",
+      "messageMinLength": "Message must be at least 10 characters long"
+    },
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "messages": {
+      "success": "Your message has been sent successfully! We'll get back to you soon.",
+      "error": "There was an error sending your message. Please try again."
+    }
   }
 }

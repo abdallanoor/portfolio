@@ -50,8 +50,8 @@
   --accent: #e8e5e0;
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: #e8e5e0;
-  --input: #e8e5e0;
+  --border: #dbd9d5;
+  --input: #dbd9d5;
   --ring: oklch(86.686% 0.0001 271.152);
 }
 
