@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -31,13 +32,18 @@ export default function Hero() {
       </p>
 
       <div className="flex items-center gap-2">
-        <Button size="lg" className="cursor-pointer">
+        <Button
+          size="lg"
+          onClick={() => scrollToSection("contact")}
+          className="cursor-pointer"
+        >
           <span>{t("contact")}</span>
           <ArrowUpRight className="size-4" />
         </Button>
 
         <Button
           variant="link"
+          onClick={() => scrollToSection("projects")}
           className="opacity-80 hover:opacity-100 hover:no-underline cursor-pointer"
         >
           <span>{t("portfolio")}</span>

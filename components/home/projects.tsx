@@ -105,7 +105,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="relative bg-section">
+    <section className="relative bg-section" id="projects">
       <div className="section container">
         <div className="md:col-span-2 md:sticky md:top-20 md:self-start">
           <SectionHeader title={t("title")} description={t("description")} />
