@@ -13,7 +13,7 @@ export default function LocaleSwitcher() {
 
   function onSelectChange(nextLocale: string) {
     startTransition(() => {
-      router.push(pathname, { locale: nextLocale });
+      router.replace(pathname, { locale: nextLocale });
     });
   }
 
