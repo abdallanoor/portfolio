@@ -54,23 +54,21 @@ export default function ContactLinks() {
                 ? undefined
                 : "noopener noreferrer"
             }
-            className="group flex items-center gap-2 py-1 rounded-md"
+            aria-label={`${link.label}: ${link.value}`}
+            className="group flex items-center gap-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-all duration-300"
           >
-            <div className="flex-shrink-0">
-              <IconComponent className="size-4 text-muted-foreground transition-colors duration-200 group-hover:text-foreground" />
+            <div
+              className={`p-2.5 bg-muted/50 text-muted-foreground rounded-md flex items-center justify-center transition-colors duration-200 group-hover:bg-muted group-hover:text-foreground`}
+            >
+              <IconComponent className={`size-4`} />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-200">
-                  {link.label}
-                </span>
-                <span
-                  dir="ltr"
-                  className="text-xs text-muted-foreground font-mono truncate"
-                >
-                  {link.value}
-                </span>
-              </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-muted-foreground">
+                {link.label}
+              </span>
+              <span dir="ltr" className="text-xs font-mono">
+                {link.value}
+              </span>
             </div>
           </a>
         );
