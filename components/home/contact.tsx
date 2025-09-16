@@ -10,7 +10,7 @@ export default function Contact() {
       <div className="section container">
         <div className="md:col-span-2">
           <SectionHeader title={t("title")} description={t("description")} />
-          <div className="mt-4">
+          <div className="mt-8 mb-2">
             <ContactLinks />
           </div>
         </div>
