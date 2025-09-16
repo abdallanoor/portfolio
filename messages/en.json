@@ -73,11 +73,13 @@
     "fields": {
       "name": "Name",
       "email": "Email",
+      "subject": "Subject",
       "message": "Message"
     },
     "placeholders": {
       "name": "Enter your full name",
       "email": "email@example.com",
+      "subject": "Message subject",
       "message": "Write your message here..."
     },
     "validation": {

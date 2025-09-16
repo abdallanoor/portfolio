@@ -73,11 +73,13 @@
     "fields": {
       "name": "الاسم",
       "email": "البريد الإلكترونى",
+      "subject": "الموضوع",
       "message": "الرسالة"
     },
     "placeholders": {
       "name": "اسمك الكامل",
       "email": "email@example.com",
+      "subject": "موضوع الرسالة",
       "message": "اكتب رسالتك هنا..."
     },
     "validation": {

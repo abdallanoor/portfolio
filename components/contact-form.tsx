@@ -12,12 +12,14 @@ import { Loader2, CheckCircle, AlertCircle, ArrowUpRight } from "lucide-react";
 interface FormData {
   name: string;
   email: string;
+  subject: string;
   message: string;
 }
 
 interface FormErrors {
   name?: string;
   email?: string;
+  subject?: string;
   message?: string;
 }
 
@@ -26,6 +28,7 @@ export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -75,7 +78,7 @@ export default function ContactForm() {
 
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
         setErrors({});
       } else {
         setSubmitStatus("error");
@@ -137,6 +140,20 @@ export default function ContactForm() {
         )}
       </div>
 
+      {/* Subject */}
+      <div className="space-y-2">
+        <Label htmlFor="subject">{t("fields.subject")}</Label>
+        <Input
+          id="subject"
+          type="text"
+          value={formData.subject}
+          onChange={(e) => handleChange("subject", e.target.value)}
+          placeholder={t("placeholders.subject")}
+          className="shadow-none"
+          disabled={isSubmitting}
+        />
+      </div>
+
       {/* Message */}
       <div className="space-y-2">
         <Label htmlFor="message">{t("fields.message")}</Label>
@@ -145,7 +162,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={(e) => handleChange("message", e.target.value)}
           placeholder={t("placeholders.message")}
-          className={`min-h-28 resize-none shadow-none`}
+          className={`min-h-[100px] resize-none shadow-none`}
           disabled={isSubmitting}
         />
         {errors.message && (
