@@ -145,7 +145,7 @@ export default function ContactForm() {
           value={formData.message}
           onChange={(e) => handleChange("message", e.target.value)}
           placeholder={t("placeholders.message")}
-          className={`min-h-[100px] resize-none shadow-none`}
+          className={`min-h-28 resize-none shadow-none`}
           disabled={isSubmitting}
         />
         {errors.message && (
