@@ -92,5 +92,12 @@
       "success": "Your message has been sent successfully! We'll get back to you soon.",
       "error": "There was an error sending your message. Please try again."
     }
+  },
+  "footer": {
+    "copyright": "© 2025 Abdallah Noor. No rights reserved.",
+    "madeWith": {
+      "part1": "Designed & developed with",
+      "part2": "in Egypt"
+    }
   }
 }

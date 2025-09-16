@@ -8,8 +8,8 @@ import { routing } from "@/i18n/routing";
 
 import "../globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
-// Configure Geist for Latin characters only
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,7 +17,6 @@ const geistSans = Geist({
   preload: true,
 });
 
-// Configure IBM Plex for Arabic characters only
 const ibmSansArabic = IBM_Plex_Sans_Arabic({
   variable: "--font-ibm-sans",
   subsets: ["arabic"],
@@ -64,7 +63,6 @@ export default async function LocaleLayout({
   const isRTL = locale === "ar";
   const direction = isRTL ? "rtl" : "ltr";
 
-  // All font variables are always loaded
   const fontVariables = `${geistSans.variable} ${ibmSansArabic.variable} ${geistMono.variable}`;
 
   return (
@@ -79,6 +77,7 @@ export default async function LocaleLayout({
           >
             <Header />
             {children}
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
