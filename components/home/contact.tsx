@@ -6,7 +6,7 @@ import ContactLinks from "../contact-links";
 export default function Contact() {
   const t = useTranslations("contact");
   return (
-    <section className="relative" id="contact">
+    <section className="relative scroll-mt-16" id="contact">
       <div className="section container">
         <div className="md:col-span-2">
           <SectionHeader title={t("title")} description={t("description")} />

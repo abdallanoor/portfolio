@@ -21,7 +21,7 @@ export default function About() {
   const t = useTranslations("about");
 
   return (
-    <section className="section container">
+    <section className="section container scroll-mt-16" id="about">
       <div className="md:col-span-2">
         <SectionHeader title={t("title")} description={t("description")} />
       </div>
