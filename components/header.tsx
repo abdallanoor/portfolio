@@ -97,7 +97,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 ms-auto me-1">
+        <div className="flex items-center gap-2 ms-auto me-2">
           <LocaleSwitcher />
           <Button
             variant="ghost"
@@ -134,9 +134,9 @@ export default function Header() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <X className="size-7" />
+            <X className="size-8" />
           ) : (
-            <Menu className="size-7" />
+            <Menu className="size-8" />
           )}
           <span className="sr-only">{t("menu")}</span>
         </button>
