@@ -134,19 +134,21 @@ export default function Header() {
         </div>
 
         <button
-          className="md:hidden p-2 pe-0 cursor-pointer transition-transform duration-300 active:scale-90"
+          className="md:hidden p-1 pe-0 cursor-pointer"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <Menu className="size-7" />
+          {isMobileMenuOpen ? (
+            <X className="size-7" />
+          ) : (
+            <Menu className="size-7" />
+          )}
           <span className="sr-only">{t("menu")}</span>
         </button>
       </div>
 
       <div
-        className={`md:hidden border-t bg-background overflow-hidden transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen
-            ? "max-h-96 opacity-100 translate-y-0"
-            : "max-h-0 opacity-0 -translate-y-2"
+        className={`md:hidden bg-background overflow-hidden ${
+          isMobileMenuOpen ? "max-h-96 border-t " : "max-h-0"
         }`}
       >
         <nav className="py-4">
