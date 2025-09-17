@@ -2,15 +2,21 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { scrollToSection } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function Hero() {
   const t = useTranslations("hero");
 
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="container py-32">
+    <section className="container py-32" id="hero">
       <Badge
         variant="secondary"
         className="mb-10 gap-1.5 rounded-full px-4 py-2"
@@ -34,7 +40,7 @@ export default function Hero() {
       <div className="flex items-center gap-2">
         <Button
           size="lg"
-          onClick={() => scrollToSection("contact")}
+          onClick={() => scrollToSection("#contact")}
           className="cursor-pointer"
         >
           <span>{t("contact")}</span>
@@ -43,7 +49,7 @@ export default function Hero() {
 
         <Button
           variant="link"
-          onClick={() => scrollToSection("projects")}
+          onClick={() => scrollToSection("#projects")}
           className="opacity-80 hover:opacity-100 hover:no-underline cursor-pointer"
         >
           <span>{t("portfolio")}</span>
