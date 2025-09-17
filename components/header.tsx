@@ -134,10 +134,10 @@ export default function Header() {
         </div>
 
         <button
-          className="md:hidden cursor-pointer transition-transform duration-300 active:scale-90"
+          className="md:hidden p-3 pe-0 cursor-pointer transition-transform duration-300 active:scale-90"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <Menu className="size-6" />
+          <Menu className="size-7" />
           <span className="sr-only">{t("menu")}</span>
         </button>
       </div>
