@@ -5,7 +5,14 @@
   },
   "header": {
     "name": "Abdallah Noor",
-    "toggleTheme": "Toggle theme"
+    "toggleTheme": "Toggle theme",
+    "menu": "Menu",
+    "links": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "contact": "Contact"
+    }
   },
   "hero": {
     "available": "Available for work",

@@ -5,7 +5,14 @@
   },
   "header": {
     "name": "عبدالله نور",
-    "toggleTheme": "تبديل الثيم"
+    "toggleTheme": "تبديل الثيم",
+    "menu": "القائمة",
+    "links": {
+      "home": "الرئيسية",
+      "about": "نبذة عني",
+      "projects": "المشاريع",
+      "contact": "تواصل معي"
+    }
   },
   "hero": {
     "available": "متاح للعمل",
