@@ -128,13 +128,13 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 ms-auto max-md:hidden">
+        <div className="flex items-center gap-2 ms-auto me-1">
           <LocaleSwitcher />
           <ThemeToggle />
         </div>
 
         <button
-          className="md:hidden p-3 pe-0 cursor-pointer transition-transform duration-300 active:scale-90"
+          className="md:hidden p-2 pe-0 cursor-pointer transition-transform duration-300 active:scale-90"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <Menu className="size-7" />
@@ -166,13 +166,6 @@ export default function Header() {
                 {item.name}
               </Button>
             ))}
-          </div>
-
-          <div className="pt-4 border-t border-border/50 mt-4">
-            <div className="container flex items-center justify-between">
-              <ThemeToggle />
-              <LocaleSwitcher />
-            </div>
           </div>
         </nav>
       </div>
