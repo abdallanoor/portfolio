@@ -102,81 +102,79 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background border-b z-50">
-      <div>
-        <div className="container flex items-center justify-between h-16">
-          <button
-            onClick={() => scrollToSection("#hero")}
-            className="sm:text-lg hover:opacity-80 font-semibold cursor-pointer"
-          >
-            {t("name")}
-          </button>
+      <div className="container flex items-center justify-between h-16">
+        <button
+          onClick={() => scrollToSection("#hero")}
+          className="sm:text-lg hover:opacity-80 font-semibold cursor-pointer"
+        >
+          {t("name")}
+        </button>
 
-          <nav className="hidden md:flex items-center justify-center gap-3 flex-1">
+        <nav className="hidden md:flex items-center justify-center gap-3 flex-1">
+          {navItems.map((item) => (
+            <Button
+              key={item.name}
+              variant="link"
+              size="sm"
+              onClick={() => scrollToSection(item.href)}
+              className={`hover:no-underline cursor-pointer p-1 transition-all duration-300 ${
+                activeSection === item.href.substring(1)
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              {item.name}
+            </Button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2 ms-auto max-md:hidden">
+          <LocaleSwitcher />
+          <ThemeToggle />
+        </div>
+
+        <button
+          className="md:hidden cursor-pointer transition-transform duration-300 active:scale-90"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <Menu className="size-6" />
+          <span className="sr-only">{t("menu")}</span>
+        </button>
+      </div>
+
+      <div
+        className={`md:hidden border-t bg-background overflow-hidden transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen
+            ? "max-h-96 opacity-100 translate-y-0"
+            : "max-h-0 opacity-0 -translate-y-2"
+        }`}
+      >
+        <nav className="py-4">
+          <div className="container space-y-2">
             {navItems.map((item) => (
               <Button
                 key={item.name}
-                variant="link"
-                size="sm"
+                size="lg"
+                variant="ghost"
                 onClick={() => scrollToSection(item.href)}
-                className={`hover:no-underline cursor-pointer p-1 transition-all duration-300 ${
+                className={`w-full transition-all duration-300 active:scale-95 cursor-pointer ${
                   activeSection === item.href.substring(1)
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-primary"
+                    ? "bg-accent dark:bg-accent/50"
+                    : ""
                 }`}
               >
                 {item.name}
               </Button>
             ))}
-          </nav>
-
-          <div className="flex items-center gap-2 ms-auto max-md:hidden">
-            <LocaleSwitcher />
-            <ThemeToggle />
           </div>
 
-          <button
-            className="md:hidden cursor-pointer transition-transform duration-300 active:scale-90"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <Menu className="size-7" />
-            <span className="sr-only">{t("menu")}</span>
-          </button>
-        </div>
-
-        <div
-          className={`md:hidden border-t bg-background overflow-hidden transition-all duration-300 ease-in-out ${
-            isMobileMenuOpen
-              ? "max-h-96 opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-2"
-          }`}
-        >
-          <nav className="py-4">
-            <div className="container space-y-2">
-              {navItems.map((item) => (
-                <Button
-                  key={item.name}
-                  size="lg"
-                  variant="ghost"
-                  onClick={() => scrollToSection(item.href)}
-                  className={`w-full transition-all duration-300 active:scale-95 cursor-pointer ${
-                    activeSection === item.href.substring(1)
-                      ? "bg-accent dark:bg-accent/50"
-                      : ""
-                  }`}
-                >
-                  {item.name}
-                </Button>
-              ))}
+          <div className="pt-4 border-t border-border/50 mt-4">
+            <div className="container flex items-center justify-between">
+              <ThemeToggle />
+              <LocaleSwitcher />
             </div>
-
-            <div className="px-4 pt-2 border-t border-border/50 mt-4">
-              <div className="container flex items-center justify-between">
-                <ThemeToggle />
-                <LocaleSwitcher />
-              </div>
-            </div>
-          </nav>
-        </div>
+          </div>
+        </nav>
       </div>
     </header>
   );
