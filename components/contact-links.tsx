@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { Mail, Linkedin, Github, MessageCircle } from "lucide-react";
+import { Mail, Linkedin, Github, MessageCircle, Instagram } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface ContactLink {
@@ -24,14 +24,20 @@ export default function ContactLinks() {
     {
       icon: Linkedin,
       label: t("links.linkedin"),
-      value: "in/abdallahnoor",
+      value: "abdallahnoor",
       href: "https://linkedin.com/in/abdallahnoor",
     },
     {
       icon: Github,
       label: t("links.github"),
-      value: "@abdallanoor",
+      value: "abdallanoor",
       href: "https://github.com/abdallanoor",
+    },
+    {
+      icon: Instagram,
+      label: t("links.instagram"),
+      value: "abdallahanoor",
+      href: "https://www.instagram.com/abdallahanoor",
     },
     {
       icon: MessageCircle,
@@ -42,11 +48,11 @@ export default function ContactLinks() {
   ];
   return (
     <div className="space-y-1">
-      {contactLinks.map((link) => {
+      {contactLinks.map((link, index) => {
         const IconComponent = link.icon;
         return (
           <a
-            key={link.label}
+            key={index}
             href={link.href}
             target={link.href.startsWith("mailto:") ? "_self" : "_blank"}
             rel={
