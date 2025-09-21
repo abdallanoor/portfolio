@@ -6,7 +6,6 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
-import "../globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
