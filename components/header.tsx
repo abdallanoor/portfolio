@@ -71,7 +71,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background border-b z-50">
-      <div className="container flex items-center justify-between h-[70px]">
+      <div className="container flex items-center justify-between h-16">
         <button
           onClick={() => scrollToSection("#hero")}
           className="sm:text-lg hover:opacity-80 font-semibold cursor-pointer"
