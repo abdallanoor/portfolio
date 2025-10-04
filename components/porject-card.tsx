@@ -13,7 +13,6 @@ import {
 import { useTranslations } from "next-intl";
 
 export interface ProjectData {
-  id: number;
   year: string;
   status: "active" | "archived" | "in-development";
   featured: boolean;

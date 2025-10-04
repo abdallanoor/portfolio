@@ -7,7 +7,16 @@ export default function Projects() {
 
   const projectsData: ProjectData[] = [
     {
-      id: 1,
+      year: "2025",
+      status: "in-development",
+      featured: false,
+      projectUrl: "https://wattsupmedia.vercel.app",
+      docsUrl: "https://github.com/abdallanoor/watts-up-media",
+      title: t("list.6.title"),
+      description: t("list.6.description"),
+      technologies: ["nextjs", "tailwindcss", "shadcn-ui", "resend"],
+    },
+    {
       year: "2025",
       status: "in-development",
       featured: true,
@@ -28,24 +37,6 @@ export default function Projects() {
       ],
     },
     {
-      id: 2,
-      year: "2025",
-      status: "active",
-      featured: false,
-      projectUrl: "https://perapixel.com",
-      docsUrl: "https://github.com/abdallanoor/pera-pixel",
-      title: t("list.1.title"),
-      description: t("list.1.description"),
-      technologies: [
-        "nextjs",
-        "tailwindcss",
-        "shadcn-ui",
-        "framer-motion",
-        "resend",
-      ],
-    },
-    {
-      id: 3,
       year: "2025",
       status: "archived",
       featured: false,
@@ -62,7 +53,22 @@ export default function Projects() {
       ],
     },
     {
-      id: 4,
+      year: "2025",
+      status: "active",
+      featured: false,
+      projectUrl: "https://perapixel.com",
+      docsUrl: "https://github.com/abdallanoor/pera-pixel",
+      title: t("list.1.title"),
+      description: t("list.1.description"),
+      technologies: [
+        "nextjs",
+        "tailwindcss",
+        "shadcn-ui",
+        "framer-motion",
+        "resend",
+      ],
+    },
+    {
       year: "2025",
       status: "active",
       featured: false,
@@ -73,7 +79,6 @@ export default function Projects() {
       technologies: ["angular", "primeng", "tailwindcss", "ngx-translate"],
     },
     {
-      id: 5,
       year: "2024",
       status: "active",
       featured: false,
@@ -84,7 +89,6 @@ export default function Projects() {
       technologies: ["angular", "primeng", "tailwindcss", "restapi", "stripe"],
     },
     {
-      id: 6,
       year: "2024",
       status: "active",
       featured: true,
@@ -112,8 +116,8 @@ export default function Projects() {
         </div>
         <div className="md:col-span-3">
           <div className="grid grid-cols-1 gap-6">
-            {projectsData.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {projectsData.map((project, i) => (
+              <ProjectCard key={i} project={project} />
             ))}
           </div>
         </div>
