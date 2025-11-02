@@ -103,13 +103,15 @@ export default function ContactForm() {
       {/* Name */}
       <div className="space-y-2">
         <Label htmlFor="name">{t("fields.name")} *</Label>
-        <Input
+        <input
           id="name"
           type="text"
           value={formData.name}
           onChange={(e) => handleChange("name", e.target.value)}
           placeholder={t("placeholders.name")}
-          className={`shadow-none ${errors.name ? "border-destructive" : ""}`}
+          className={`w-full px-0 py-3 bg-transparent border-0 border-b-2 border-border focus:border-primary outline-none transition-colors placeholder:text-muted-foreground ${
+            errors.name ? "border-destructive" : ""
+          }`}
           disabled={isSubmitting}
         />
         {errors.name && (
@@ -123,13 +125,15 @@ export default function ContactForm() {
       {/* Email */}
       <div className="space-y-2">
         <Label htmlFor="email">{t("fields.email")} *</Label>
-        <Input
+        <input
           id="email"
           type="email"
           value={formData.email}
           onChange={(e) => handleChange("email", e.target.value)}
           placeholder={t("placeholders.email")}
-          className={`shadow-none ${errors.email ? "border-destructive" : ""}`}
+          className={`w-full px-0 py-3 bg-transparent border-0 border-b-2 border-border focus:border-primary outline-none transition-colors placeholder:text-muted-foreground ${
+            errors.email ? "border-destructive" : ""
+          }`}
           disabled={isSubmitting}
         />
         {errors.email && (
@@ -143,13 +147,13 @@ export default function ContactForm() {
       {/* Subject */}
       <div className="space-y-2">
         <Label htmlFor="subject">{t("fields.subject")}</Label>
-        <Input
+        <input
           id="subject"
           type="text"
           value={formData.subject}
           onChange={(e) => handleChange("subject", e.target.value)}
           placeholder={t("placeholders.subject")}
-          className="shadow-none"
+          className="w-full px-0 py-3 bg-transparent border-0 border-b-2 border-border focus:border-primary outline-none transition-colors placeholder:text-muted-foreground"
           disabled={isSubmitting}
         />
       </div>
@@ -157,12 +161,12 @@ export default function ContactForm() {
       {/* Message */}
       <div className="space-y-2">
         <Label htmlFor="message">{t("fields.message")}</Label>
-        <Textarea
+        <textarea
           id="message"
           value={formData.message}
           onChange={(e) => handleChange("message", e.target.value)}
           placeholder={t("placeholders.message")}
-          className={`min-h-[100px] resize-none shadow-none`}
+          className={`min-h-[100px] resize-none w-full px-0 py-3 bg-transparent border-0 border-b-2 border-border focus:border-primary outline-none transition-colors placeholder:text-muted-foreground`}
           disabled={isSubmitting}
         />
         {errors.message && (
