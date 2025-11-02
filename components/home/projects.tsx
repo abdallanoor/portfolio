@@ -10,7 +10,7 @@ export default function Projects() {
       year: "2025",
       status: "active",
       featured: false,
-      projectUrl: "https://wattsupmedia.vercel.app",
+      projectUrl: "https://wattsupmedia.net",
       docsUrl: "https://github.com/abdallanoor/watts-up-media",
       title: t("list.6.title"),
       description: t("list.6.description"),
