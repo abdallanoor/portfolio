@@ -38,19 +38,16 @@ export default function Hero() {
       </p>
 
       <div className="flex items-center gap-2">
-        <Button
-          size="lg"
-          onClick={() => scrollToSection("#contact")}
-          className="cursor-pointer"
-        >
+        <Button size="lg" onClick={() => scrollToSection("#contact")}>
           <span>{t("contact")}</span>
           <ArrowUpRight className="size-4" />
         </Button>
 
         <Button
           variant="link"
+          size="lg"
           onClick={() => scrollToSection("#projects")}
-          className="opacity-80 hover:opacity-100 hover:no-underline cursor-pointer"
+          className="opacity-80 hover:opacity-100 hover:no-underline hover:bg-accent/60"
         >
           <span>{t("portfolio")}</span>
           <ArrowUpRight className="size-4" />

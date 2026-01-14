@@ -61,10 +61,10 @@ export default function ContactLinks() {
                 : "noopener noreferrer"
             }
             aria-label={`${link.label}: ${link.value}`}
-            className="group flex items-center gap-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-all duration-300"
+            className="group flex items-center gap-2 py-1 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-all duration-300"
           >
             <div
-              className={`p-2.5 bg-muted/50 text-muted-foreground rounded-md flex items-center justify-center transition-colors duration-200 group-hover:bg-muted group-hover:text-foreground`}
+              className={`p-3 bg-muted/50 text-muted-foreground rounded-full flex items-center justify-center transition-colors duration-200 group-hover:bg-muted group-hover:text-foreground`}
             >
               <IconComponent className={`size-4`} />
             </div>

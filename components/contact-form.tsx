@@ -184,17 +184,8 @@ export default function ContactForm() {
         size="lg"
         className="max-sm:w-full"
       >
-        {isSubmitting ? (
-          <>
-            {t("submitting")}
-            <Loader2 className="size-4 animate-spin" />
-          </>
-        ) : (
-          <>
-            {t("submit")}
-            <ArrowUpRight className="size-4" />
-          </>
-        )}
+        {isSubmitting ? <Loader2 className="animate-spin" /> : <ArrowUpRight />}
+        {t("submit")}
       </Button>
 
       {/* Success */}
