@@ -4,11 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
-import { Menu, X } from "lucide-react";
+import { Home, User, Briefcase, Mail } from "lucide-react";
 import LocaleSwitcher from "./locale-switcher";
 
 export default function Header() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   const t = useTranslations("header");
@@ -16,10 +15,10 @@ export default function Header() {
 
   const navItems = useMemo(
     () => [
-      { name: t("links.home"), href: "#hero" },
-      { name: t("links.about"), href: "#about" },
-      { name: t("links.projects"), href: "#projects" },
-      { name: t("links.contact"), href: "#contact" },
+      { name: t("links.home"), href: "#hero", icon: Home },
+      { name: t("links.about"), href: "#about", icon: User },
+      { name: t("links.projects"), href: "#projects", icon: Briefcase },
+      { name: t("links.contact"), href: "#contact", icon: Mail },
     ],
     [t]
   );
@@ -32,7 +31,6 @@ export default function Header() {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setIsMobileMenuOpen(false);
     }
   };
 
@@ -74,7 +72,7 @@ export default function Header() {
       <div className="container flex items-center justify-between h-16">
         <button
           onClick={() => scrollToSection("#hero")}
-          className="sm:text-lg hover:opacity-80 font-semibold cursor-pointer"
+          className="text-lg hover:opacity-80 font-semibold cursor-pointer"
         >
           {t("name")}
         </button>
@@ -97,7 +95,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 ms-auto me-2">
+        <div className="flex items-center gap-2 ms-auto">
           <LocaleSwitcher />
           <Button
             variant="ghost"
@@ -128,43 +126,24 @@ export default function Header() {
             <span className="sr-only">{t("toggleTheme")}</span>
           </Button>
         </div>
-
-        <button
-          className="md:hidden p-1 pe-0 cursor-pointer"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? (
-            <X className="size-6" />
-          ) : (
-            <Menu className="size-6" />
-          )}
-          <span className="sr-only">{t("menu")}</span>
-        </button>
       </div>
 
-      <div
-        className={`md:hidden bg-background overflow-hidden ${
-          isMobileMenuOpen ? "max-h-96 border-t " : "max-h-0"
-        }`}
-      >
-        <nav className="py-4">
-          <div className="container space-y-2">
-            {navItems.map((item) => (
-              <Button
-                key={item.name}
-                size="lg"
-                variant="ghost"
-                onClick={() => scrollToSection(item.href)}
-                className={`w-full transition-all duration-300 active:scale-95 cursor-pointer ${
-                  activeSection === item.href.substring(1)
-                    ? "bg-accent dark:bg-accent/50"
-                    : ""
-                }`}
-              >
-                {item.name}
-              </Button>
-            ))}
-          </div>
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t z-50 h-16">
+        <nav className="container h-full flex justify-around items-center">
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              onClick={() => scrollToSection(item.href)}
+              className={`flex flex-col items-center justify-center w-full h-full transition-colors ${
+                activeSection === item.href.substring(1)
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              <item.icon className="size-5 mb-1" />
+              <span className="text-[10px] font-medium">{item.name}</span>
+            </button>
+          ))}
         </nav>
       </div>
     </header>

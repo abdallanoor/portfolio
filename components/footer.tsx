@@ -1,13 +1,13 @@
 "use client";
 
-import { Heart } from "lucide-react";
+// import { Heart } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t">
+    <footer className="border-t max-md:pb-16">
       <div className="container">
         <div className="flex items-center justify-center text-sm text-muted-foreground h-16">
           <p>{t("copyright")}</p>
