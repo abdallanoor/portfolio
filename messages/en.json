@@ -68,7 +68,11 @@
       },
       {
         "title": "Watts Up Media",
-        "description": "Landing page for an agency specialized in Real Estate Photography & Video."
+        "description": "Real estate media platform offering professional photography services, featuring a digital store with Stripe payments, automated content delivery via Dropbox, and a secure Admin Panel."
+      },
+      {
+        "title": "Property Booking Platform",
+        "description": "Property booking platform supporting three roles (Guest, Host, Admin), enabling property browsing and booking, host listings management, and full admin control."
       }
     ]
   },

@@ -134,9 +134,9 @@ export default function Header() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
-            <X className="size-7" />
+            <X className="size-6" />
           ) : (
-            <Menu className="size-7" />
+            <Menu className="size-6" />
           )}
           <span className="sr-only">{t("menu")}</span>
         </button>
