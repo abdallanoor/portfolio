@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import SectionHeader from "../section-header";
 import { ProjectCard, ProjectData } from "../porject-card";
+import { ScrollReveal } from "@/components/scroll-reveal";
 
 export default function Projects() {
   const t = useTranslations("projects");
@@ -136,17 +137,23 @@ export default function Projects() {
   ];
 
   return (
-    <section className="relative bg-section scroll-mt-16" id="projects">
+    <section className="relative bg-section" id="projects">
       <div className="section container">
         <div className="md:col-span-2 md:sticky md:top-20 md:self-start">
-          <SectionHeader title={t("title")} description={t("description")} />
+          <ScrollReveal width="100%" delay={0.4}>
+            <SectionHeader title={t("title")} description={t("description")} />
+          </ScrollReveal>
         </div>
         <div className="md:col-span-3">
-          <div className="grid grid-cols-1 gap-6">
-            {projectsData.map((project, i) => (
-              <ProjectCard key={i} project={project} />
-            ))}
-          </div>
+          <ScrollReveal width="100%" delay={0.6}>
+            <div className="grid grid-cols-1 gap-6">
+              {projectsData.map((project, i) => (
+                <ScrollReveal key={i} width="100%">
+                  <ProjectCard project={project} />
+                </ScrollReveal>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

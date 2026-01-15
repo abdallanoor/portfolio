@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useLenis } from "lenis/react";
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
@@ -10,6 +11,7 @@ import LocaleSwitcher from "./locale-switcher";
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const lenis = useLenis();
 
   const t = useTranslations("header");
   const { setTheme } = useTheme();
@@ -29,10 +31,15 @@ export default function Header() {
   };
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (lenis) {
+      lenis.scrollTo(href, { offset: -64 });
       setIsMobileMenuOpen(false);
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+      }
     }
   };
 
@@ -70,7 +77,7 @@ export default function Header() {
   }, [navItems]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-background border-b z-50">
+    <header className="fixed top-0 left-0 right-0 bg-background z-50">
       <div className="container flex items-center justify-between h-16">
         <button
           onClick={() => scrollToSection("#hero")}
@@ -143,8 +150,8 @@ export default function Header() {
       </div>
 
       <div
-        className={`md:hidden bg-background overflow-hidden ${
-          isMobileMenuOpen ? "max-h-96 border-t " : "max-h-0"
+        className={`md:hidden bg-background overflow-hidden transition-all duration-300 ${
+          isMobileMenuOpen ? "max-h-96" : "max-h-0"
         }`}
       >
         <nav className="py-4">

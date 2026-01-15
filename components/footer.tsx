@@ -7,7 +7,7 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t max-md:pb-16">
+    <footer className="border-t">
       <div className="container">
         <div className="flex items-center justify-center text-sm text-muted-foreground h-16">
           <p>{t("copyright")}</p>

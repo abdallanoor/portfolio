@@ -8,6 +8,7 @@ import { routing } from "@/i18n/routing";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import SmoothScroll from "@/components/smooth-scroll";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 export async function generateMetadata({
@@ -93,9 +95,11 @@ export default async function LocaleLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
-            {children}
-            <Footer />
+            <SmoothScroll>
+              <Header />
+              {children}
+              <Footer />
+            </SmoothScroll>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

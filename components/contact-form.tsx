@@ -182,7 +182,7 @@ export default function ContactForm() {
         type="submit"
         disabled={isSubmitting}
         size="lg"
-        className="max-sm:w-full"
+        className="max-sm:w-full active:scale-95"
       >
         {isSubmitting ? <Loader2 className="animate-spin" /> : <ArrowUpRight />}
         {t("submit")}
