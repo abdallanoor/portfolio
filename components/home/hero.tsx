@@ -21,7 +21,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="container py-32" id="hero">
+    <section className="container min-h-[calc(100vh-4rem)] py-32" id="hero">
       <ScrollReveal width="100%">
         <Badge
           variant="secondary"
