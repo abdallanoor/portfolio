@@ -4,7 +4,7 @@
     "description": "Portfolio website of Abdallah Noor, Software Engineer."
   },
   "header": {
-    "name": "Abdallah Noor",
+    "name": "Abdallah.",
     "toggleTheme": "Toggle theme",
     "menu": "Menu",
     "links": {
@@ -73,6 +73,10 @@
       {
         "title": "Property Booking Platform",
         "description": "Property booking platform supporting three roles (Guest, Host, Admin), enabling property browsing and booking, host listings management, and full admin control."
+      },
+      {
+        "title": "Book Classifier",
+        "description": "A system for classifying book segments into hierarchical categories, with user management and Excel export."
       }
     ]
   },
