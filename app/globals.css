@@ -6,7 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), var(--font-ibm-sans), system-ui,
+  --font-sans: var(--font-funnel-display), var(--font-ibm-sans), system-ui,
     sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --color-section: var(--section);
@@ -86,7 +86,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Geist", "IBM Plex Sans Arabic", sans-serif;
+    font-family: "Funnel Display", "IBM Plex Sans Arabic", sans-serif;
   }
   ::selection {
     @apply bg-foreground text-background;

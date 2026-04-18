@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Funnel_Display, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,8 +10,8 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SmoothScroll from "@/components/smooth-scroll";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const funnelDisplay = Funnel_Display({
+  variable: "--font-funnel-display",
   subsets: ["latin"],
   display: "swap",
   preload: true,
@@ -83,7 +83,7 @@ export default async function LocaleLayout({
   const isRTL = locale === "ar";
   const direction = isRTL ? "rtl" : "ltr";
 
-  const fontVariables = `${geistSans.variable} ${ibmSansArabic.variable} ${geistMono.variable}`;
+  const fontVariables = `${funnelDisplay.variable} ${ibmSansArabic.variable} ${geistMono.variable}`;
 
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>
