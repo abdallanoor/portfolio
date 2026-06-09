@@ -96,6 +96,7 @@ function ThemeToggle() {
 export default function Header() {
   const [activeSection, setActiveSection] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const lenis = useLenis();
   const t = useTranslations("header");
 
@@ -117,6 +118,16 @@ export default function Header() {
     }
   };
 
+  // Detect mobile device width to disable expensive/jittery layout animations
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  // Performance-optimized scroll spy that caches bounding boxes
   useEffect(() => {
     const sections = navItems.map((item) => item.href.substring(1));
     
@@ -141,18 +152,22 @@ export default function Header() {
     };
 
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
-      let found = false;
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% viewport offset
+      let currentSection = "";
 
       for (const section of sectionOffsets) {
         if (scrollPosition >= section.top && scrollPosition < section.bottom) {
-          setActiveSection(section.id);
-          found = true;
+          currentSection = section.id;
           break;
         }
       }
 
-      if (!found) setActiveSection("");
+      // Ensure the contact section is selected if scrolled to the absolute bottom
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+        currentSection = sections[sections.length - 1];
+      }
+
+      setActiveSection(currentSection);
     };
 
     updateOffsets();
@@ -160,7 +175,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", updateOffsets);
 
-    // Recalculate offsets after a short delay for font/image loading settle
+    // Re-run offset calculation after a small timeout to let the layout fully settle
     const timer = setTimeout(updateOffsets, 150);
 
     return () => {
@@ -171,10 +186,7 @@ export default function Header() {
   }, [navItems]);
 
   return (
-    <header
-      style={{ transform: "translate3d(0, 0, 0)", backfaceVisibility: "hidden" }}
-      className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 md:bottom-auto md:top-5"
-    >
+    <header className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 md:bottom-auto md:top-5">
       <motion.nav
         variants={dockVariants}
         initial="hidden"
@@ -188,12 +200,13 @@ export default function Header() {
             <motion.button
               key={name}
               variants={itemVariants}
-              whileHover={{ scale: 1.07 }}
+              whileHover={isMobile ? undefined : { scale: 1.07 }}
               whileTap={{ scale: 0.92 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => scrollToSection(href)}
               aria-current={isActive ? "page" : undefined}
               title={name}
+              style={{ backfaceVisibility: "hidden" }}
               className={`relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-colors md:w-auto md:px-4 md:text-sm ${
                 isActive
                   ? "text-foreground"
@@ -203,6 +216,7 @@ export default function Header() {
               {isActive && (
                 <motion.span
                   layoutId="dock-active-thumb"
+                  style={{ backfaceVisibility: "hidden" }}
                   className="liquid-thumb absolute inset-0 rounded-full"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
@@ -211,13 +225,14 @@ export default function Header() {
               {!isActive && hoveredIndex === index && (
                 <motion.span
                   layoutId="dock-hover-thumb"
+                  style={{ backfaceVisibility: "hidden" }}
                   className="absolute inset-0 rounded-full bg-foreground/[0.04] dark:bg-white/[0.05] border border-foreground/[0.03] dark:border-white/[0.04] shadow-xs"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
 
-              <Icon className="relative size-[1.2rem] md:hidden" />
-              <span className="relative hidden md:inline">{name}</span>
+              <Icon style={{ backfaceVisibility: "hidden" }} className="relative size-[1.2rem] md:hidden" />
+              <span style={{ backfaceVisibility: "hidden" }} className="relative hidden md:inline">{name}</span>
             </motion.button>
           );
         })}
