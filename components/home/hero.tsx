@@ -13,11 +13,11 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-between overflow-hidden py-16 lg:py-24"
+      className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-between overflow-hidden pb-28 pt-10 lg:py-24"
     >
       {/* Main content area — vertically centred in the available space */}
       <div className="container flex flex-1 items-center">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-12 xl:gap-24 w-full py-8 lg:py-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12 xl:gap-24 w-full lg:py-0">
           
           {/* Text block — Name and hand-drawn annotations */}
           <div className="relative w-fit shrink-0 order-2 lg:order-1">
