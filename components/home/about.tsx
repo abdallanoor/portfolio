@@ -1,7 +1,11 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import SectionHeader from "../section-header";
 import { Badge } from "../ui/badge";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { motion, useInView, useReducedMotion, type Variants } from "framer-motion";
+import { useRef } from "react";
 
 const technologies = [
   "HTML",
@@ -12,14 +16,44 @@ const technologies = [
   "Next.js",
   "Angular",
   "Tailwind",
-  "Shadcn UI",
-  "PrimeNG",
-  "Framer Motion",
+  "Node.js",
+  "MongoDB",
+  "Docker",
   "Git & GitHub",
 ];
 
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.9,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 8,
+    filter: "blur(4px)",
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+    },
+  },
+};
+
 export default function About() {
   const t = useTranslations("about");
+  const techRef = useRef<HTMLDivElement>(null);
+  const isTechInView = useInView(techRef, { once: true, margin: "-10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section className="section container" id="about">
@@ -35,9 +69,11 @@ export default function About() {
             <p>{t("description2")}</p>
           </div>
         </ScrollReveal>
-        <div className="mt-6">
+        <div ref={techRef} className="mt-6">
           <ScrollReveal width="100%" delay={0.8}>
             <p className="mb-3 text-xl font-medium">{t("technologies")}</p>
+          </ScrollReveal>
+          {shouldReduceMotion ? (
             <div className="flex gap-1 flex-wrap">
               {technologies.map((tech, i) => (
                 <Badge variant="secondary" className="px-3 py-1" key={i}>
@@ -45,7 +81,22 @@ export default function About() {
                 </Badge>
               ))}
             </div>
-          </ScrollReveal>
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isTechInView ? "show" : "hidden"}
+              className="flex gap-1 flex-wrap"
+            >
+              {technologies.map((tech, i) => (
+                <motion.div key={i} variants={itemVariants}>
+                  <Badge variant="secondary" className="px-3 py-1">
+                    {tech}
+                  </Badge>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
