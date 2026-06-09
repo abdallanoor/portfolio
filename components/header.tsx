@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLenis } from "lenis/react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
@@ -96,8 +96,6 @@ function ThemeToggle() {
 export default function Header() {
   const [activeSection, setActiveSection] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const lenis = useLenis();
   const t = useTranslations("header");
 
   const navItems = useMemo(
@@ -110,6 +108,56 @@ export default function Header() {
     [t]
   );
 
+  // Section offsets measured once (and on resize / content changes) so the
+  // scroll handler never forces a layout reflow on every frame — that reflow
+  // is what made the dock judder while scrolling on mobile.
+  const sectionOffsets = useRef<
+    { id: string; top: number; bottom: number }[]
+  >([]);
+
+  const measureSections = useCallback(() => {
+    sectionOffsets.current = navItems
+      .map(({ href }) => {
+        const el = document.getElementById(href.substring(1));
+        if (!el) return null;
+        return { id: el.id, top: el.offsetTop, bottom: el.offsetTop + el.offsetHeight };
+      })
+      .filter((s): s is { id: string; top: number; bottom: number } => s !== null);
+  }, [navItems]);
+
+  const updateActiveSection = useCallback((scrollY: number) => {
+    const scrollPosition = scrollY + 100;
+    let current = "";
+    for (const s of sectionOffsets.current) {
+      if (scrollPosition >= s.top && scrollPosition < s.bottom) {
+        current = s.id;
+        break;
+      }
+    }
+    // Skip the state update (and the layout spring) when nothing changed.
+    setActiveSection((prev) => (prev === current ? prev : current));
+  }, []);
+
+  // Read from Lenis's own rAF-batched scroll loop instead of a raw `scroll`
+  // listener that fires far more often on mobile.
+  const lenis = useLenis(({ scroll }) => updateActiveSection(scroll));
+
+  useEffect(() => {
+    measureSections();
+    updateActiveSection(window.scrollY);
+
+    // Re-measure when the viewport or document height changes (font swap,
+    // images loading, layout shifts) so offsets stay accurate.
+    const ro = new ResizeObserver(measureSections);
+    ro.observe(document.body);
+    window.addEventListener("resize", measureSections);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measureSections);
+    };
+  }, [measureSections, updateActiveSection]);
+
   const scrollToSection = (href: string) => {
     if (lenis) {
       lenis.scrollTo(href);
@@ -117,73 +165,6 @@ export default function Header() {
       document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  // Detect mobile device width to disable expensive/jittery layout animations
-  useEffect(() => {
-    const media = window.matchMedia("(max-width: 768px)");
-    setIsMobile(media.matches);
-    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    media.addEventListener("change", listener);
-    return () => media.removeEventListener("change", listener);
-  }, []);
-
-  // Performance-optimized scroll spy that caches bounding boxes
-  useEffect(() => {
-    const sections = navItems.map((item) => item.href.substring(1));
-    
-    interface SectionOffset {
-      id: string;
-      top: number;
-      bottom: number;
-    }
-    
-    let sectionOffsets: SectionOffset[] = [];
-
-    const updateOffsets = () => {
-      sectionOffsets = sections.map((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const top = element.offsetTop;
-          const bottom = top + element.offsetHeight;
-          return { id: section, top, bottom };
-        }
-        return { id: section, top: 0, bottom: 0 };
-      });
-    };
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% viewport offset
-      let currentSection = "";
-
-      for (const section of sectionOffsets) {
-        if (scrollPosition >= section.top && scrollPosition < section.bottom) {
-          currentSection = section.id;
-          break;
-        }
-      }
-
-      // Ensure the contact section is selected if scrolled to the absolute bottom
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
-        currentSection = sections[sections.length - 1];
-      }
-
-      setActiveSection(currentSection);
-    };
-
-    updateOffsets();
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateOffsets);
-
-    // Re-run offset calculation after a small timeout to let the layout fully settle
-    const timer = setTimeout(updateOffsets, 150);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateOffsets);
-      clearTimeout(timer);
-    };
-  }, [navItems]);
 
   return (
     <header className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 md:bottom-auto md:top-5">
@@ -200,13 +181,12 @@ export default function Header() {
             <motion.button
               key={name}
               variants={itemVariants}
-              whileHover={isMobile ? undefined : { scale: 1.07 }}
+              whileHover={{ scale: 1.07 }}
               whileTap={{ scale: 0.92 }}
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => scrollToSection(href)}
               aria-current={isActive ? "page" : undefined}
               title={name}
-              style={{ backfaceVisibility: "hidden" }}
               className={`relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full transition-colors md:w-auto md:px-4 md:text-sm ${
                 isActive
                   ? "text-foreground"
@@ -216,7 +196,6 @@ export default function Header() {
               {isActive && (
                 <motion.span
                   layoutId="dock-active-thumb"
-                  style={{ backfaceVisibility: "hidden" }}
                   className="liquid-thumb absolute inset-0 rounded-full"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
@@ -225,14 +204,13 @@ export default function Header() {
               {!isActive && hoveredIndex === index && (
                 <motion.span
                   layoutId="dock-hover-thumb"
-                  style={{ backfaceVisibility: "hidden" }}
                   className="absolute inset-0 rounded-full bg-foreground/[0.04] dark:bg-white/[0.05] border border-foreground/[0.03] dark:border-white/[0.04] shadow-xs"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
 
-              <Icon style={{ backfaceVisibility: "hidden" }} className="relative size-[1.2rem] md:hidden" />
-              <span style={{ backfaceVisibility: "hidden" }} className="relative hidden md:inline">{name}</span>
+              <Icon className="relative size-[1.2rem] md:hidden" />
+              <span className="relative hidden md:inline">{name}</span>
             </motion.button>
           );
         })}

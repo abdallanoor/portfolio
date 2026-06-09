@@ -137,12 +137,26 @@
 .liquid-glass {
   position: relative;
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.68); /* Increased from 0.22 for contrast stability */  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  background: rgba(255, 255, 255, 0.68); /* Increased from 0.22 for contrast stability */
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
   backdrop-filter: blur(30px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.45);
   box-shadow: 0 10px 32px -12px rgba(20, 16, 10, 0.15),
     0 1px 2px -1px rgba(20, 16, 10, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  /* Promote the fixed dock to its own compositor layer so the heavy
+     backdrop-blur isn't re-rasterized on every scroll frame (mobile jitter). */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Lighten the backdrop-blur on phones — blur(30px) on a fixed element is the
+   single most expensive thing to repaint while scrolling on mobile GPUs. */
+@media (max-width: 768px) {
+  .liquid-glass {
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    backdrop-filter: blur(18px) saturate(180%);
+  }
 }
 .liquid-glass::before {
   content: "";
