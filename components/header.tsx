@@ -118,40 +118,63 @@ export default function Header() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navItems.map((item) => item.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
+    const sections = navItems.map((item) => item.href.substring(1));
+    
+    interface SectionOffset {
+      id: string;
+      top: number;
+      bottom: number;
+    }
+    
+    let sectionOffsets: SectionOffset[] = [];
 
-      let found = false;
-
-      for (const section of sections) {
+    const updateOffsets = () => {
+      sectionOffsets = sections.map((section) => {
         const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
+          const top = element.offsetTop;
+          const bottom = top + element.offsetHeight;
+          return { id: section, top, bottom };
+        }
+        return { id: section, top: 0, bottom: 0 };
+      });
+    };
 
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            found = true;
-            break;
-          }
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100;
+      let found = false;
+
+      for (const section of sectionOffsets) {
+        if (scrollPosition >= section.top && scrollPosition < section.bottom) {
+          setActiveSection(section.id);
+          found = true;
+          break;
         }
       }
 
       if (!found) setActiveSection("");
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    updateOffsets();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateOffsets);
+
+    // Recalculate offsets after a short delay for font/image loading settle
+    const timer = setTimeout(updateOffsets, 150);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateOffsets);
+      clearTimeout(timer);
+    };
   }, [navItems]);
 
   return (
-    <header className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 md:bottom-auto md:top-5">
+    <header
+      style={{ transform: "translate3d(0, 0, 0)", backfaceVisibility: "hidden" }}
+      className="fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 md:bottom-auto md:top-5"
+    >
       <motion.nav
         variants={dockVariants}
         initial="hidden"
