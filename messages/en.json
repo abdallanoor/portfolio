@@ -16,11 +16,14 @@
   },
   "hero": {
     "collaboration": "Ready for collaboration",
+    "caption": "not AI",
+    "greeting": "Hello, I'm",
     "name": "Abdallah Noor",
-    "title": "Software Engineer",
+    "role": "Software Engineer",
     "description": "I build exceptional digital experiences using the latest technologies. Specialized in creating software systems for individuals and startups.",
     "contact": "Let's Talk",
-    "portfolio": "View Work"
+    "portfolio": "View Work",
+    "location": "Cairo, Egypt"
   },
   "about": {
     "title": "About Me",

@@ -9,6 +9,10 @@
   --font-sans: var(--font-funnel-display), var(--font-ibm-sans), system-ui,
     sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: var(--font-fredoka), var(--font-baloo-arabic),
+    var(--font-ibm-sans), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), var(--font-aref-ruqaa),
+    var(--font-ibm-sans), cursive;
   --color-section: var(--section);
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -118,8 +122,120 @@
 }
 @layer components {
   .section {
-    @apply relative grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-16 py-14 md:py-16 lg:py-20;
+    @apply relative grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-16 py-14 md:py-24 lg:py-28;
   }
+}
+
+/* ----------------------------------------------------------------
+   Liquid Glass (Apple-style) material
+   ---------------------------------------------------------------- */
+
+/* Frosted, refractive surface. Kept mostly transparent on purpose — the
+   heavy blur + bright specular rim are what sell "liquid glass", not an
+   opaque fill. Explicit colors (no theme variables) so the glass reads
+   the same regardless of the page tint behind it. */
+.liquid-glass {
+  position: relative;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.68); /* Increased from 0.22 for contrast stability */  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 10px 32px -12px rgba(20, 16, 10, 0.15),
+    0 1px 2px -1px rgba(20, 16, 10, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.12) 26%,
+    rgba(255, 255, 255, 0) 52%
+  );
+}
+.dark .liquid-glass {
+  background: rgba(24, 24, 27, 0.72); /* Increased from 0.45 for contrast stability */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5),
+    0 2px 6px -2px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -10px 22px -16px rgba(255, 255, 255, 0.04);
+}
+.dark .liquid-glass::before {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.03) 26%,
+    rgba(255, 255, 255, 0) 52%
+  );
+}
+
+/* Active highlight (nav + locale) — a clear glass lens, NOT a white chip.
+   Mostly transparent so the blurred content shows through it; a diagonal
+   sheen, bright rim and drop shadow read as a raised piece of glass. */
+.liquid-thumb {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.06) 55%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 4px 12px -4px rgba(20, 16, 10, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -3px 8px -4px rgba(255, 255, 255, 0.45);
+}
+.dark .liquid-thumb {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.03) 55%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -3px 8px -4px rgba(255, 255, 255, 0.06);
+}
+
+/* Theme-switch handle — a more solid raised glass knob so it reads as a
+   draggable toggle (a fully transparent knob would look broken). */
+.liquid-knob {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(255, 255, 255, 0.74)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 5px -1px rgba(20, 16, 10, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+.dark .liquid-knob {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.32),
+    rgba(255, 255, 255, 0.17)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+/* Recessed track behind sliding controls */
+.liquid-track {
+  background: rgba(20, 16, 10, 0.05);
+  box-shadow: inset 0 1px 2px rgba(20, 16, 10, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4);
+}
+.dark .liquid-track {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 
 html.lenis,

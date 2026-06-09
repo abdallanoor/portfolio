@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Funnel_Display, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
+import {
+  Aref_Ruqaa,
+  Baloo_Bhaijaan_2,
+  Caveat,
+  Fredoka,
+  Funnel_Display,
+  Geist_Mono,
+  IBM_Plex_Sans_Arabic,
+} from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -30,6 +38,44 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
   display: "swap",
   preload: true,
+});
+
+// Bold, rounded display font for the oversized hero name.
+// adjustFontFallback is disabled so Arabic glyphs fall through to the Arabic
+// font in the stack instead of matching the metrics-adjusted (Arabic-capable)
+// system fallback that next/font would otherwise inject.
+const fredoka = Fredoka({
+  variable: "--font-fredoka",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  adjustFontFallback: false,
+});
+
+// Handwritten/marker font for the casual "Hello, I'm" + "software engineer" lines
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  adjustFontFallback: false,
+});
+
+// Arabic counterpart of the rounded display font (hero name in RTL)
+const balooArabic = Baloo_Bhaijaan_2({
+  variable: "--font-baloo-arabic",
+  subsets: ["arabic"],
+  display: "swap",
+  preload: false,
+});
+
+// Arabic handwritten/calligraphic font (counterpart of Caveat in RTL)
+const arefRuqaa = Aref_Ruqaa({
+  variable: "--font-aref-ruqaa",
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export async function generateMetadata({
@@ -83,7 +129,7 @@ export default async function LocaleLayout({
   const isRTL = locale === "ar";
   const direction = isRTL ? "rtl" : "ltr";
 
-  const fontVariables = `${funnelDisplay.variable} ${ibmSansArabic.variable} ${geistMono.variable}`;
+  const fontVariables = `${funnelDisplay.variable} ${ibmSansArabic.variable} ${geistMono.variable} ${fredoka.variable} ${caveat.variable} ${balooArabic.variable} ${arefRuqaa.variable}`;
 
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>
