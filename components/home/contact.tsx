@@ -13,11 +13,9 @@ export default function Contact() {
           <ScrollReveal width="100%" delay={0.4}>
             <SectionHeader title={t("title")} description={t("description")} />
           </ScrollReveal>
-          <ScrollReveal width="100%" delay={0.6}>
-            <div className="mt-8 mb-2 w-fit">
-              <ContactLinks />
-            </div>
-          </ScrollReveal>
+          <div className="mt-8 mb-2 w-fit">
+            <ContactLinks delay={0.6} />
+          </div>
         </div>
         <div className="md:col-span-3">
           <div className="flex flex-col gap-4">
