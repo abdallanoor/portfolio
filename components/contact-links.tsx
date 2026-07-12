@@ -9,7 +9,7 @@ import {
   WhatsappIcon,
   InstagramIcon,
   CopyIcon,
-  TickDouble01Icon,
+  CheckCheckIcon,
 } from "@hugeicons/core-free-icons";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
@@ -141,9 +141,15 @@ export default function ContactLinks({ delay = 0.6 }: ContactLinksProps) {
           </div>
           <div>
             {isCopied ? (
-              <HugeiconsIcon icon={TickDouble01Icon} className="size-3 text-primary animate-in zoom-in-50 duration-200" />
+              <HugeiconsIcon
+                icon={CheckCheckIcon}
+                className="size-3 text-primary animate-in zoom-in-50 duration-200"
+              />
             ) : (
-              <HugeiconsIcon icon={CopyIcon} className="size-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <HugeiconsIcon
+                icon={CopyIcon}
+                className="size-3 text-muted-foreground group-hover:text-foreground transition-colors"
+              />
             )}
           </div>
         </button>
