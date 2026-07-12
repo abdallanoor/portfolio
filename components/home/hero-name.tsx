@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 // Each unit fades + slides up (transform/opacity only).
 const NAME_CLASS =
-  "font-sans text-[clamp(3.2rem,10.5vw,7.2rem)] font-black leading-[0.92] tracking-tighter text-primary rtl:text-[clamp(4.6rem,14.5vw,10rem)] lg:whitespace-nowrap";
+  "font-sans text-[clamp(3.2rem,10.5vw,7.2rem)] font-black leading-[0.92] rtl:leading-[1.1] tracking-tighter text-primary rtl:text-[clamp(4.6rem,14.5vw,10rem)] lg:whitespace-nowrap";
 
 /**
  * Staggered display name (#3): letters appear one after another on load.
@@ -79,7 +79,7 @@ export default function HeroName({ name }: { name: string }) {
             <motion.span
               key={i}
               variants={unitVariants}
-              className="inline-block will-change-[transform,filter] py-[0.1em] -my-[0.1em] px-[0.05em] -mx-[0.05em]"
+              className="inline-block blur-none rtl:pb-2 rtl:-mb-2 rtl:px-1 rtl:-mx-1"
             >
               {token}
             </motion.span>
