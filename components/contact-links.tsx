@@ -1,15 +1,16 @@
 "use client";
 
 import type React from "react";
+import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 import {
-  Mail,
-  Linkedin,
-  Github,
-  MessageCircle,
-  Instagram,
-  Copy,
-  CheckCheck,
-} from "lucide-react";
+  Mail01Icon,
+  Linkedin01Icon,
+  GithubIcon,
+  WhatsappIcon,
+  InstagramIcon,
+  CopyIcon,
+  TickDouble01Icon,
+} from "@hugeicons/core-free-icons";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import {
@@ -20,7 +21,7 @@ import {
 } from "framer-motion";
 
 interface ContactLink {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: IconSvgElement;
   label: string;
   value: string;
   href: string;
@@ -76,32 +77,32 @@ export default function ContactLinks({ delay = 0.6 }: ContactLinksProps) {
 
   const contactLinks: ContactLink[] = [
     {
-      icon: Mail,
+      icon: Mail01Icon,
       label: t("links.email"),
       value: "abdallaahnoor@gmail.com",
       href: "mailto:abdallaahnoor@gmail.com",
       copyable: true,
     },
     {
-      icon: Linkedin,
+      icon: Linkedin01Icon,
       label: t("links.linkedin"),
       value: "abdallahnoor",
       href: "https://linkedin.com/in/abdallahnoor",
     },
     {
-      icon: Github,
+      icon: GithubIcon,
       label: t("links.github"),
       value: "abdallanoor",
       href: "https://github.com/abdallanoor",
     },
     {
-      icon: Instagram,
+      icon: InstagramIcon,
       label: t("links.instagram"),
       value: "abdallahanoor",
       href: "https://www.instagram.com/abdallahanoor",
     },
     {
-      icon: MessageCircle,
+      icon: WhatsappIcon,
       label: t("links.whatsapp"),
       value: "+20 (10) 2504 7619",
       href: "https://wa.me/201025047619",
@@ -130,19 +131,19 @@ export default function ContactLinks({ delay = 0.6 }: ContactLinksProps) {
           className="group flex items-center gap-2 py-1 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 transition-all duration-300 w-full text-start cursor-pointer"
         >
           <div className="p-3 bg-muted/50 text-muted-foreground rounded-full flex items-center justify-center transition-colors duration-200 group-hover:bg-muted group-hover:text-foreground">
-            <IconComponent className={`size-4`} />
+            <HugeiconsIcon icon={IconComponent} className="size-4" />
           </div>
           <div className="flex flex-col flex-1">
             <span className="text-sm text-muted-foreground">{link.label}</span>
-            <span dir="ltr" className="text-xs font-mono">
+            <span dir="ltr" className="text-xs font-thmanyah-sans">
               {link.value}
             </span>
           </div>
           <div>
             {isCopied ? (
-              <CheckCheck className="size-3 text-primary animate-in zoom-in-50 duration-200" />
+              <HugeiconsIcon icon={TickDouble01Icon} className="size-3 text-primary animate-in zoom-in-50 duration-200" />
             ) : (
-              <Copy className="size-3 text-muted-foreground group-hover:text-foreground transition-colors" />
+              <HugeiconsIcon icon={CopyIcon} className="size-3 text-muted-foreground group-hover:text-foreground transition-colors" />
             )}
           </div>
         </button>
@@ -160,11 +161,11 @@ export default function ContactLinks({ delay = 0.6 }: ContactLinksProps) {
         <div
           className={`p-3 bg-muted/50 text-muted-foreground rounded-full flex items-center justify-center transition-colors duration-200 group-hover:bg-muted group-hover:text-foreground`}
         >
-          <IconComponent className={`size-4`} />
+          <HugeiconsIcon icon={IconComponent} className="size-4" />
         </div>
         <div className="flex flex-col">
           <span className="text-sm text-muted-foreground">{link.label}</span>
-          <span dir="ltr" className="text-xs font-mono">
+          <span dir="ltr" className="text-xs font-thmanyah-sans">
             {link.value}
           </span>
         </div>

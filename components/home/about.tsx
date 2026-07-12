@@ -27,7 +27,7 @@ const containerVariants: Variants = {
   show: {
     transition: {
       staggerChildren: 0.05,
-      delayChildren: 0.9,
+      delayChildren: 1.1,
     },
   },
 };
@@ -63,14 +63,16 @@ export default function About() {
         </ScrollReveal>
       </div>
       <div className="md:col-span-3">
-        <ScrollReveal width="100%" delay={0.6}>
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
+          <ScrollReveal width="100%" delay={0.6}>
             <p>{t("description1")}</p>
-            <p>{t("description2")}</p>
-          </div>
-        </ScrollReveal>
-        <div ref={techRef} className="mt-6">
+          </ScrollReveal>
           <ScrollReveal width="100%" delay={0.8}>
+            <p>{t("description2")}</p>
+          </ScrollReveal>
+        </div>
+        <div ref={techRef} className="mt-6">
+          <ScrollReveal width="100%" delay={1.0}>
             <p className="mb-3 text-xl font-medium">{t("technologies")}</p>
           </ScrollReveal>
           {shouldReduceMotion ? (

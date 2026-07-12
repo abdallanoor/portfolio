@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { CodeXml, Link2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { CodeIcon, Link05Icon } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -49,8 +50,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 project.status === "active"
                   ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400"
                   : project.status === "in-development"
-                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
-                  : ""
+                    ? "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                    : ""
               }`}
             >
               {tStatus(project.status)}
@@ -72,13 +73,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 size="sm"
                 className="size-6 opacity-60 hover:opacity-100"
                 asChild
+                title={t("buttons.live")}
               >
                 <a
                   href={project.projectUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Link2 className="size-4" />
+                  <HugeiconsIcon icon={Link05Icon} className="size-4" />
                 </a>
               </Button>
             )}
@@ -88,13 +90,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 size="sm"
                 className="size-6 opacity-60 hover:opacity-100"
                 asChild
+                title={t("buttons.code")}
               >
                 <a
                   href={project.docsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <CodeXml className="size-4" />
+                  <HugeiconsIcon icon={CodeIcon} className="size-4" />
                 </a>
               </Button>
             )}

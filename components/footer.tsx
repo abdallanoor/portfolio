@@ -1,6 +1,7 @@
 "use client";
 
-// import { Heart } from "lucide-react";
+// import { HugeiconsIcon } from "@hugeicons/react";
+// import { FavouriteIcon } from "@hugeicons/core-free-icons";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
@@ -12,7 +13,7 @@ export default function Footer() {
         <div className="flex items-center justify-center text-sm text-muted-foreground h-16">
           <p>{t("copyright")}</p>
           {/* <p className="flex items-center gap-1">
-            {t("madeWith.part1")} <Heart className="size-4" />
+            {t("madeWith.part1")} <HugeiconsIcon icon={FavouriteIcon} className="size-4" />
             {t("madeWith.part2")}
           </p> */}
         </div>

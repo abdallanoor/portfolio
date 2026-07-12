@@ -5,7 +5,15 @@ import { useLenis } from "lenis/react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import { motion, type Variants } from "framer-motion";
-import { Briefcase, House, Mail, Moon, Sun, UserRound } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Briefcase01Icon,
+  Home01Icon,
+  Mail01Icon,
+  Moon01Icon,
+  Sun02Icon,
+  UserIcon,
+} from "@hugeicons/core-free-icons";
 import LocaleSwitcher from "./locale-switcher";
 
 // Dock pops in with a spring, then its children cascade in (stagger)
@@ -73,7 +81,10 @@ function ThemeToggle() {
           }}
           transition={iconSpring}
         >
-          <Sun className="size-3.5 text-foreground" />
+          <HugeiconsIcon
+            icon={Sun02Icon}
+            className="size-3.5 text-foreground"
+          />
         </motion.span>
         <motion.span
           className="absolute flex"
@@ -85,7 +96,10 @@ function ThemeToggle() {
           }}
           transition={iconSpring}
         >
-          <Moon className="size-3.5 text-foreground" />
+          <HugeiconsIcon
+            icon={Moon01Icon}
+            className="size-3.5 text-foreground"
+          />
         </motion.span>
       </motion.span>
       <span className="sr-only">{t("toggleTheme")}</span>
@@ -100,29 +114,35 @@ export default function Header() {
 
   const navItems = useMemo(
     () => [
-      { name: t("links.home"), href: "#hero", Icon: House },
-      { name: t("links.about"), href: "#about", Icon: UserRound },
-      { name: t("links.projects"), href: "#projects", Icon: Briefcase },
-      { name: t("links.contact"), href: "#contact", Icon: Mail },
+      { name: t("links.home"), href: "#hero", Icon: Home01Icon },
+      { name: t("links.about"), href: "#about", Icon: UserIcon },
+      { name: t("links.projects"), href: "#projects", Icon: Briefcase01Icon },
+      { name: t("links.contact"), href: "#contact", Icon: Mail01Icon },
     ],
-    [t]
+    [t],
   );
 
   // Section offsets measured once (and on resize / content changes) so the
   // scroll handler never forces a layout reflow on every frame — that reflow
   // is what made the dock judder while scrolling on mobile.
-  const sectionOffsets = useRef<
-    { id: string; top: number; bottom: number }[]
-  >([]);
+  const sectionOffsets = useRef<{ id: string; top: number; bottom: number }[]>(
+    [],
+  );
 
   const measureSections = useCallback(() => {
     sectionOffsets.current = navItems
       .map(({ href }) => {
         const el = document.getElementById(href.substring(1));
         if (!el) return null;
-        return { id: el.id, top: el.offsetTop, bottom: el.offsetTop + el.offsetHeight };
+        return {
+          id: el.id,
+          top: el.offsetTop,
+          bottom: el.offsetTop + el.offsetHeight,
+        };
       })
-      .filter((s): s is { id: string; top: number; bottom: number } => s !== null);
+      .filter(
+        (s): s is { id: string; top: number; bottom: number } => s !== null,
+      );
   }, [navItems]);
 
   const updateActiveSection = useCallback((scrollY: number) => {
@@ -209,7 +229,10 @@ export default function Header() {
                 />
               )}
 
-              <Icon className="relative size-[1.2rem] md:hidden" />
+              <HugeiconsIcon
+                icon={Icon}
+                className="relative size-[1.2rem] md:hidden"
+              />
               <span className="relative hidden md:inline">{name}</span>
             </motion.button>
           );
@@ -221,10 +244,16 @@ export default function Header() {
           className="mx-1 h-6 w-px bg-border/70"
         />
 
-        <motion.div variants={itemVariants} onMouseEnter={() => setHoveredIndex(null)}>
+        <motion.div
+          variants={itemVariants}
+          onMouseEnter={() => setHoveredIndex(null)}
+        >
           <LocaleSwitcher />
         </motion.div>
-        <motion.div variants={itemVariants} onMouseEnter={() => setHoveredIndex(null)}>
+        <motion.div
+          variants={itemVariants}
+          onMouseEnter={() => setHoveredIndex(null)}
+        >
           <ThemeToggle />
         </motion.div>
       </motion.nav>

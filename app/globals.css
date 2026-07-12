@@ -6,13 +6,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-funnel-display), var(--font-ibm-sans), system-ui,
-    sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-display: var(--font-fredoka), var(--font-baloo-arabic),
-    var(--font-ibm-sans), system-ui, sans-serif;
-  --font-hand: var(--font-caveat), var(--font-aref-ruqaa),
-    var(--font-ibm-sans), cursive;
+  --font-sans: var(--font-thmanyah-sans), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), var(--font-thmanyah-serif-display), cursive;
+  --font-thmanyah-sans: var(--font-thmanyah-sans), system-ui, sans-serif;
+  --font-thmanyah-serif-display: var(--font-thmanyah-serif-display), serif;
+  --font-thmanyah-serif-text: var(--font-thmanyah-serif-text), serif;
+  --font-caveat:
+    var(--font-caveat), var(--font-thmanyah-serif-display), cursive;
   --color-section: var(--section);
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -90,7 +90,37 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Funnel Display", "IBM Plex Sans Arabic", sans-serif;
+    font-family: var(--font-thmanyah-sans), system-ui, sans-serif;
+  }
+  p {
+    font-family: var(--font-thmanyah-serif-text), serif;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-thmanyah-serif-display), serif;
+  }
+  blockquote,
+  .quote {
+    font-family: var(--font-thmanyah-serif-display), serif;
+    font-feature-settings:
+      "salt" 1,
+      "ss01" 1;
+  }
+  /* Enable stylistic alternates (extended letters) for titles and display texts */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-hand {
+    font-feature-settings:
+      "salt" 1,
+      "ss01" 1;
   }
   ::selection {
     @apply bg-foreground text-background;
@@ -137,11 +167,17 @@
 .liquid-glass {
   position: relative;
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.68); /* Increased from 0.22 for contrast stability */
+  background: rgba(
+    255,
+    255,
+    255,
+    0.68
+  ); /* Increased from 0.22 for contrast stability */
   -webkit-backdrop-filter: blur(30px) saturate(200%);
   backdrop-filter: blur(30px) saturate(200%);
   border: 1px solid rgba(255, 255, 255, 0.45);
-  box-shadow: 0 10px 32px -12px rgba(20, 16, 10, 0.15),
+  box-shadow:
+    0 10px 32px -12px rgba(20, 16, 10, 0.15),
     0 1px 2px -1px rgba(20, 16, 10, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.65);
   /* Promote the fixed dock to its own compositor layer so the heavy
@@ -173,9 +209,15 @@
   );
 }
 .dark .liquid-glass {
-  background: rgba(24, 24, 27, 0.72); /* Increased from 0.45 for contrast stability */
+  background: rgba(
+    24,
+    24,
+    27,
+    0.72
+  ); /* Increased from 0.45 for contrast stability */
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 10px 30px -8px rgba(0, 0, 0, 0.5),
     0 2px 6px -2px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     inset 0 -10px 22px -16px rgba(255, 255, 255, 0.04);
@@ -200,7 +242,8 @@
     rgba(255, 255, 255, 0.14) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: 0 4px 12px -4px rgba(20, 16, 10, 0.22),
+  box-shadow:
+    0 4px 12px -4px rgba(20, 16, 10, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     inset 0 -3px 8px -4px rgba(255, 255, 255, 0.45);
 }
@@ -212,7 +255,8 @@
     rgba(255, 255, 255, 0.08) 100%
   );
   border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 4px 12px -4px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
     inset 0 -3px 8px -4px rgba(255, 255, 255, 0.06);
 }
@@ -226,7 +270,8 @@
     rgba(255, 255, 255, 0.74)
   );
   border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 2px 5px -1px rgba(20, 16, 10, 0.3),
+  box-shadow:
+    0 2px 5px -1px rgba(20, 16, 10, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 .dark .liquid-knob {
@@ -236,19 +281,22 @@
     rgba(255, 255, 255, 0.17)
   );
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.6),
+  box-shadow:
+    0 2px 5px -1px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.32);
 }
 
 /* Recessed track behind sliding controls */
 .liquid-track {
   background: rgba(20, 16, 10, 0.05);
-  box-shadow: inset 0 1px 2px rgba(20, 16, 10, 0.14),
+  box-shadow:
+    inset 0 1px 2px rgba(20, 16, 10, 0.14),
     inset 0 -1px 0 rgba(255, 255, 255, 0.4);
 }
 .dark .liquid-track {
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45),
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.45),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 

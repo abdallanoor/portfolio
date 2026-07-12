@@ -3,11 +3,15 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, CheckCircle, AlertCircle, ArrowUpRight } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Loading03Icon,
+  CheckmarkCircle02Icon,
+  AlertCircleIcon,
+  ArrowUpRight01Icon,
+} from "@hugeicons/core-free-icons";
 
 interface FormData {
   name: string;
@@ -116,7 +120,7 @@ export default function ContactForm() {
         />
         {errors.name && (
           <p className="text-destructive text-xs flex items-center gap-1">
-            <AlertCircle className="w-3 h-3" />
+            <HugeiconsIcon icon={AlertCircleIcon} className="w-3 h-3" />
             {errors.name}
           </p>
         )}
@@ -138,7 +142,7 @@ export default function ContactForm() {
         />
         {errors.email && (
           <p className="text-destructive text-xs flex items-center gap-1">
-            <AlertCircle className="w-3 h-3" />
+            <HugeiconsIcon icon={AlertCircleIcon} className="w-3 h-3" />
             {errors.email}
           </p>
         )}
@@ -171,7 +175,7 @@ export default function ContactForm() {
         />
         {errors.message && (
           <p className="text-destructive text-xs flex items-center gap-1">
-            <AlertCircle className="w-3 h-3" />
+            <HugeiconsIcon icon={AlertCircleIcon} className="w-3 h-3" />
             {errors.message}
           </p>
         )}
@@ -184,14 +188,18 @@ export default function ContactForm() {
         size="lg"
         className="max-sm:w-full active:scale-95"
       >
-        {isSubmitting ? <Loader2 className="animate-spin" /> : <ArrowUpRight />}
+        {isSubmitting ? (
+          <HugeiconsIcon icon={Loading03Icon} className="animate-spin" />
+        ) : (
+          <HugeiconsIcon icon={ArrowUpRight01Icon} />
+        )}
         {t("submit")}
       </Button>
 
       {/* Success */}
       {submitStatus === "success" && (
         <Alert>
-          <CheckCircle className="size-4" />
+          <HugeiconsIcon icon={CheckmarkCircle02Icon} className="size-4" />
           <AlertDescription>{t("messages.success")}</AlertDescription>
         </Alert>
       )}
@@ -199,7 +207,7 @@ export default function ContactForm() {
       {/* Error */}
       {submitStatus === "error" && (
         <Alert variant="destructive">
-          <AlertCircle className="size-4" />
+          <HugeiconsIcon icon={AlertCircleIcon} className="size-4" />
           <AlertDescription>{t("messages.error")}</AlertDescription>
         </Alert>
       )}

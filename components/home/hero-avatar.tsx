@@ -13,29 +13,27 @@ import { useTranslations } from "next-intl";
  * - Pops in on load, then idles statically without distracting shaking.
  * - Straightens upright and lifts smoothly on hover; honours prefers-reduced-motion.
  */
-export default function HeroAvatar() {
+export default function HeroAvatar({ delay = 0.35 }: { delay?: number }) {
   const t = useTranslations("hero");
   const reduceMotion = useReducedMotion();
 
   return (
     <motion.div
-      // Outer element owns the entrance + resting tilt (-4°). The inner card
+      // Outer element owns the entrance + resting tilt (0°). The inner card
       // owns the hover transforms.
       initial={
         reduceMotion
           ? false
-          : { opacity: 0, scale: 0.7, rotate: -14, y: -24, filter: "blur(8px)" }
+          : { opacity: 0, scale: 0.7, rotate: -10, y: -24, filter: "blur(8px)" }
       }
-      animate={{ opacity: 1, scale: 1, rotate: -4, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      animate={{ opacity: 1, scale: 1, rotate: 0, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className="relative z-20 w-[clamp(9rem,24vw,14rem)] lg:w-[clamp(13rem,20vw,17rem)]"
     >
       <motion.div
         // Hover straightens the card (the +4° cancels the outer -4° tilt) and lifts it up.
         whileHover={
-          reduceMotion
-            ? undefined
-            : { scale: 1.05, rotate: 4, y: -10 }
+          reduceMotion ? undefined : { scale: 1.05, rotate: 4, y: -10 }
         }
         transition={{
           type: "spring",
@@ -63,7 +61,7 @@ export default function HeroAvatar() {
         </div>
 
         {/* Handwritten caption in the polaroid's bottom margin */}
-        <span className="font-hand absolute inset-x-0 bottom-1 text-center text-lg leading-none  sm:text-xl">
+        <span className="font-hand absolute inset-x-0 bottom-1 text-center text-lg leading-none sm:text-xl">
           {t("caption")}
         </span>
       </motion.div>

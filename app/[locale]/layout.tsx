@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import {
-  Aref_Ruqaa,
-  Baloo_Bhaijaan_2,
-  Caveat,
-  Fredoka,
-  Funnel_Display,
-  Geist_Mono,
-  IBM_Plex_Sans_Arabic,
-} from "next/font/google";
+import { Caveat } from "next/font/google";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -18,41 +11,6 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import SmoothScroll from "@/components/smooth-scroll";
 
-const funnelDisplay = Funnel_Display({
-  variable: "--font-funnel-display",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
-const ibmSansArabic = IBM_Plex_Sans_Arabic({
-  variable: "--font-ibm-sans",
-  subsets: ["arabic"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-  display: "swap",
-  preload: true,
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
-// Bold, rounded display font for the oversized hero name.
-// adjustFontFallback is disabled so Arabic glyphs fall through to the Arabic
-// font in the stack instead of matching the metrics-adjusted (Arabic-capable)
-// system fallback that next/font would otherwise inject.
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-  adjustFontFallback: false,
-});
-
-// Handwritten/marker font for the casual "Hello, I'm" + "software engineer" lines
 const caveat = Caveat({
   variable: "--font-caveat",
   subsets: ["latin"],
@@ -61,21 +19,100 @@ const caveat = Caveat({
   adjustFontFallback: false,
 });
 
-// Arabic counterpart of the rounded display font (hero name in RTL)
-const balooArabic = Baloo_Bhaijaan_2({
-  variable: "--font-baloo-arabic",
-  subsets: ["arabic"],
+const thmanyahSans = localFont({
+  src: [
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahsans/woff2/thmanyahsans-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-thmanyah-sans",
   display: "swap",
-  preload: false,
 });
 
-// Arabic handwritten/calligraphic font (counterpart of Caveat in RTL)
-const arefRuqaa = Aref_Ruqaa({
-  variable: "--font-aref-ruqaa",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+const thmanyahSerifDisplay = localFont({
+  src: [
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahserifdisplay/woff2/thmanyahserifdisplay-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-thmanyah-serif-display",
   display: "swap",
-  preload: false,
+});
+
+const thmanyahSerifText = localFont({
+  src: [
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahseriftext/woff2/thmanyahseriftext-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahseriftext/woff2/thmanyahseriftext-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahseriftext/woff2/thmanyahseriftext-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahseriftext/woff2/thmanyahseriftext-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/font/thmanyah typeface/thmanyahseriftext/woff2/thmanyahseriftext-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-thmanyah-serif-text",
+  display: "swap",
 });
 
 export async function generateMetadata({
@@ -129,7 +166,7 @@ export default async function LocaleLayout({
   const isRTL = locale === "ar";
   const direction = isRTL ? "rtl" : "ltr";
 
-  const fontVariables = `${funnelDisplay.variable} ${ibmSansArabic.variable} ${geistMono.variable} ${fredoka.variable} ${caveat.variable} ${balooArabic.variable} ${arefRuqaa.variable}`;
+  const fontVariables = `${thmanyahSans.variable} ${thmanyahSerifDisplay.variable} ${thmanyahSerifText.variable} ${caveat.variable}`;
 
   return (
     <html lang={locale} dir={direction} suppressHydrationWarning>

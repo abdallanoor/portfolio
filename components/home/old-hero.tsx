@@ -3,7 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useLenis } from "lenis/react";
-import { ArrowUpRight } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { useTranslations } from "next-intl";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -56,7 +57,7 @@ export default function Hero() {
             className="active:scale-95"
           >
             <span>{t("contact")}</span>
-            <ArrowUpRight className="size-4" />
+            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
           </Button>
 
           <Button
@@ -66,7 +67,7 @@ export default function Hero() {
             className="opacity-80 hover:opacity-100 hover:no-underline hover:bg-accent/60 active:scale-95"
           >
             <span>{t("portfolio")}</span>
-            <ArrowUpRight className="size-4" />
+            <HugeiconsIcon icon={ArrowUpRight01Icon} className="size-4" />
           </Button>
         </div>
       </ScrollReveal>

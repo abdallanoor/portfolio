@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "title": "Abdallah Noor",
+    "title": "Abdallah - Software Engineer",
     "description": "Portfolio website of Abdallah Noor, Software Engineer."
   },
   "header": {
@@ -42,7 +42,9 @@
       "featured": "Featured"
     },
     "buttons": {
-      "hide": "Hide"
+      "hide": "Hide",
+      "live": "Live Preview",
+      "code": "View Code"
     },
     "list": [
       {
