@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 // Each unit fades + slides up (transform/opacity only).
 const NAME_CLASS =
-  "font-sans text-[clamp(3.3rem,11vw,7.5rem)] font-black leading-[0.92] tracking-tighter text-primary rtl:text-[clamp(4.3rem,14vw,9.5rem)] lg:whitespace-nowrap";
+  "font-sans text-[clamp(3.3rem,11vw,7.5rem)] font-black leading-[0.92] tracking-tighter text-primary rtl:text-[clamp(4.8rem,15vw,10.5rem)] lg:whitespace-nowrap";
 
 /**
  * Staggered display name (#3): letters appear one after another on load.
