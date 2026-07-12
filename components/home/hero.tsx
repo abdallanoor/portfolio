@@ -17,7 +17,7 @@ export default function Hero() {
     >
       {/* Main content area — vertically centred in the available space */}
       <div className="container flex flex-1 items-center">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-28 lg:gap-12 xl:gap-24 w-full lg:py-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-20 lg:gap-12 xl:gap-24 w-full lg:py-0">
           {/* Text block — Name and hand-drawn annotations */}
           <div className="relative w-fit shrink-0 order-2 lg:order-1">
             {/* "Hello, I'm" — tucked into the top-start, overlapping the name */}
@@ -49,7 +49,7 @@ export default function Hero() {
       </div>
 
       {/* Call-to-action buttons — toward the bottom of the section */}
-      <div className="container mt-20 lg:mt-0 flex justify-center lg:justify-start">
+      <div className="container mt-12 lg:mt-0 flex justify-center lg:justify-start">
         <ScrollReveal delay={0.8}>
           <HeroCta />
         </ScrollReveal>
